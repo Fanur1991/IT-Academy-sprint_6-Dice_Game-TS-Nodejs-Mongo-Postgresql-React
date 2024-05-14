@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - '3002:3002'
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - USE_MONGO=${USE_MONGO}
+    depends_on:
+      - postgres
+      - mongo
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres:16.0-alpine
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=mydatabase
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  mongo:
+    image: mongo:7.0.9-jammy
+    env_file:
+      - .env
+    environment:
+      - MONGO_INITDB_DATABASE=mydatabase
+    volumes:
+      - mongodata:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  pgdata:
+  mongodata:

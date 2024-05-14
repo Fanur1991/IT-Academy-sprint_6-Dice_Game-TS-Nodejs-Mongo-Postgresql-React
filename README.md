@@ -1,49 +1,70 @@
 /project-root
 |-- /src
-| |-- /config
-| | |-- mongoConfig.ts # Настройки подключения MongoDB
-| | |-- prismaConfig.ts # Настройки Prisma для PostgreSQL
 |
-| |-- /controllers # Контроллеры для обработки запросов
-| | |-- playerController.ts
-| | |-- gameController.ts
-| | |-- rankingController.ts
+| |-- /application
+| | |-- /dto  
+| | | |-- player.dto.ts
+| | | |-- game.dto.ts
 |
-| |-- /interfaces # Интерфейсы для репозиториев
-| | |-- IPlayerRepository.ts
+| | |-- /services
+| | | |-- playerService.ts
+| | | |-- gameService.ts
+| | | |-- rankingService.ts
+|
+| |-- /core
+| | |-- /domain
+| | | |-- /entities
+| | | | |-- IGame.ts
+| | | | |-- IPlayer.ts
+|
+| |-- /repositories
 | | |-- IGameRepository.ts
+| | |-- IPlayerRepository.ts
+| | |-- IRankingRepository.ts
 |
-| |-- /models # Модели Mongoose для MongoDB
-| | |-- PlayerModel.ts
-| | |-- GameModel.ts
+| |-- /infrastructure
+| | |-- /config
+| | | |-- mongoConfig.ts
+| | | |-- prismaConfig.ts
 |
-| |-- /repositories # Репозитории для доступа к данным
-| | |-- /mongo # Репозитории для MongoDB
-| | | |-- PlayerRepository.ts
-| | | |-- GameRepository.ts
-| | |-- /postgres # Репозитории для PostgreSQL
-| | | |-- PlayerRepository.ts
-| | | |-- GameRepository.ts
+| | |-- /controllers
+| | | |-- playerController.ts
+| | | |-- gameController.ts
+| | | |-- rankingController.ts
 |
-| |-- /routes # Маршруты для маршрутизации запросов
-| | |-- playerRoutes.ts
-| | |-- gameRoutes.ts
-| | |-- rankingRoutes.ts
+| | |-- /models
+| | | |-- PlayerModel.ts
+| | | |-- GameModel.ts
 |
-| |-- /services # Сервисы для бизнес-логики
-| | |-- playerService.ts
-| | |-- gameService.ts
+| | |-- /repositories
+| | | |-- /mongo
+| | | | |-- PlayerRepository.ts
+| | | | |-- GameRepository.ts
+| | | | |--RankingRepository.ts
+| | | |-- /postgres
+| | | | |-- PlayerRepository.ts
+| | | | |-- GameRepository.ts
+| | | | |--RankingRepository.ts
 |
-| |-- app.ts # Основной файл приложения Express
-| |-- server.ts # Точка входа для запуска сервера
+| | |-- /routes
+| | | |-- playerRoutes.ts
+| | | |-- gameRoutes.ts
+| | | |-- rankingRoutes.ts
 |
-|-- /tests # Тесты для приложения
-| |-- playerTests.ts
-| |-- gameTests.ts
+| | |-- app.ts
 |
-|-- /prisma # Конфигурация и миграции Prisma
+| |-- index.ts
+|
+| |-- /tests
+| | |-- playerTests.ts
+| | |-- gameTests.ts
+|
+| |-- /utils
+| | |-- getRepository.ts
+|
+|-- /prisma
 | |-- schema.prisma
 |
-|-- .env # Переменные окружения
-|-- package.json # Менеджер пакетов и скрипты
-|-- tsconfig.json # Конфигурация TypeScript
+|-- .env
+|-- package.json
+|-- tsconfig.json

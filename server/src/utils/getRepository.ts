@@ -1,9 +1,9 @@
-import MongoPlayerRepository from '../repositories/mongo/PlayerRepository';
-import PostgresPlayerRepository from '../repositories/postgres/PlayerRepository';
-import MongoGameRepository from '../repositories/mongo/GameRepository';
-import PostgresGameRepository from '../repositories/postgres/GameRepository';
-import MongoRankingRepository from '../repositories/mongo/RankingRepository';
-import PostgresRankingRepository from '../repositories/postgres/RankingRepository';
+import MongoPlayerRepository from '.././infrastructure/repositories/mongo/PlayerRepository';
+import PostgresPlayerRepository from '.././infrastructure/repositories/postgres/PlayerRepository';
+import MongoGameRepository from '.././infrastructure/repositories/mongo/GameRepository';
+import PostgresGameRepository from '.././infrastructure/repositories/postgres/GameRepository';
+import MongoRankingRepository from '.././infrastructure/repositories/mongo/RankingRepository';
+import PostgresRankingRepository from '.././infrastructure/repositories/postgres/RankingRepository';
 import dotenv from 'dotenv';
 
 dotenv.config();
