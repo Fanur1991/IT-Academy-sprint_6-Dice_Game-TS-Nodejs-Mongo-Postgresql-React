@@ -1,11 +1,8 @@
 import { IGame } from '../domain/entities/IGame';
+import { CreateGameDTO } from '../../application/dto/createGame.dto';
 
 export interface IGameRepository {
-  createGame(
-    playerId: string,
-    diceOne: number,
-    diceTwo: number
-  ): Promise<IGame>;
+  createGame(data: CreateGameDTO & { result: boolean }): Promise<IGame>;
   listGamesByPlayer(playerId: string): Promise<IGame[]>;
-  deleteGamesByPlayer(playerId: string): Promise<any>;
+  deleteGamesByPlayer(playerId: string): Promise<{ message: string }>;
 }

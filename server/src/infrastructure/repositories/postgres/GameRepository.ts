@@ -1,37 +1,26 @@
 import { prisma } from '../../config/prismaConfig';
 import { IGameRepository } from '../../../core/repositories/IGameRepository';
+import { IGame } from '../../../core/domain/entities/IGame';
+import { CreateGameDTO } from '../../../application/dto/createGame.dto';
 
 class GameRepository implements IGameRepository {
-  async createGame(
-    playerId: string,
-    diceOne: number,
-    diceTwo: number
-  ): Promise<any> {
-    const result = diceOne + diceTwo === 7;
+  async createGame(data: CreateGameDTO & { result: boolean }): Promise<IGame> {
     return prisma.game.create({
-      data: {
-        playerId: String(playerId),
-        diceOne,
-        diceTwo,
-        result,
-      },
+      data,
     });
   }
 
-  async listGamesByPlayer(playerId: string): Promise<any[]> {
+  async listGamesByPlayer(playerId: string): Promise<IGame[]> {
     return prisma.game.findMany({
-      where: {
-        playerId: String(playerId),
-      },
+      where: { playerId },
     });
   }
 
-  async deleteGamesByPlayer(playerId: string): Promise<any> {
-    return prisma.game.deleteMany({
-      where: {
-        playerId: String(playerId),
-      },
+  async deleteGamesByPlayer(playerId: string): Promise<{ message: string }> {
+    await prisma.game.deleteMany({
+      where: { playerId },
     });
+    return { message: 'Games deleted successfully' };
   }
 }
 

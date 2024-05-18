@@ -1,8 +1,8 @@
 export interface IGame {
+  id: string;
   playerId: string;
   diceOne: number;
   diceTwo: number;
-  result: string;
+  result: boolean;
   createdAt: Date;
-  updatedAt: Date;
 }

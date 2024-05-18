@@ -8,13 +8,13 @@ class RankingController {
     this.rankingService = rankingService;
   }
 
-  async getRanking(_req: Request, res: Response): Promise<Response> {
+  async getRankings(_req: Request, res: Response): Promise<Response> {
     try {
       const rankings = await this.rankingService.getRankings();
-      return res.json(rankings);
+      return res.status(200).json(rankings);
     } catch (error) {
       if (error instanceof Error) {
-        return res.status(500).json({ message: error.message });
+        return res.status(400).json({ message: error.message });
       } else {
         return res
           .status(500)
@@ -26,10 +26,13 @@ class RankingController {
   async getLoser(_req: Request, res: Response): Promise<Response> {
     try {
       const loser = await this.rankingService.getLoser();
-      return res.json(loser);
+      if (!loser) {
+        return res.status(404).json({ message: 'No players found' });
+      }
+      return res.status(200).json(loser);
     } catch (error) {
       if (error instanceof Error) {
-        return res.status(500).json({ message: error.message });
+        return res.status(400).json({ message: error.message });
       } else {
         return res
           .status(500)
@@ -41,10 +44,29 @@ class RankingController {
   async getWinner(_req: Request, res: Response): Promise<Response> {
     try {
       const winner = await this.rankingService.getWinner();
-      return res.json(winner);
+      if (!winner) {
+        return res.status(404).json({ message: 'No players found' });
+      }
+      return res.status(200).json(winner);
     } catch (error) {
       if (error instanceof Error) {
-        return res.status(500).json({ message: error.message });
+        return res.status(400).json({ message: error.message });
+      } else {
+        return res
+          .status(500)
+          .json({ message: 'An unexpected error occurred' });
+      }
+    }
+  }
+
+  async getAverageSuccessRate(_req: Request, res: Response): Promise<Response> {
+    try {
+      const averageSuccessRate =
+        await this.rankingService.getAverageSuccessRate();
+      return res.status(200).json({ averageSuccessRate });
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json({ message: error.message });
       } else {
         return res
           .status(500)

@@ -5,19 +5,16 @@ import { getGameRepository } from '../../utils/getRepository';
 
 const router = Router();
 const gameRepository = getGameRepository();
-const playerService = new GameService(gameRepository);
-const playerController = new GameController(playerService);
+const gameService = new GameService(gameRepository);
+const gameController = new GameController(gameService);
 
 // * A specific player rolls
-router.post('/:id', playerController.createGame.bind(playerController));
+router.post('/:id', gameController.createGame.bind(gameController));
 
 // * Deletes a player's throws
-router.delete(
-  '/:id',
-  playerController.deleteGamesByPlayer.bind(playerController)
-);
+router.delete('/:id', gameController.deleteGamesByPlayer.bind(gameController));
 
 // * Returns a list of throws for a specific player
-router.get('/:id', playerController.listGamesByPlayer.bind(playerController));
+router.get('/:id', gameController.listGamesByPlayer.bind(gameController));
 
 export default router;

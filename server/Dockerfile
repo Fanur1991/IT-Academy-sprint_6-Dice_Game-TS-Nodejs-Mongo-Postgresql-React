@@ -16,4 +16,4 @@ RUN npm run tsc
 
 EXPOSE 3002
 
-CMD ["node", "dist/server.js"]
+CMD ["node", "dist/index.js"]

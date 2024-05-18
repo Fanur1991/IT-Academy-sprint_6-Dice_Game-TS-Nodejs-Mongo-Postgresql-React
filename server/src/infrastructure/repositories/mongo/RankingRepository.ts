@@ -1,41 +1,41 @@
-import Player from '../../../infrastructure/models/PlayerModel';
+import { PlayerModel } from '../../models/PlayerModel';
 import { IRankingRepository } from '../../../core/repositories/IRankingRepository';
+import { IRanking } from '../../../core/domain/entities/IRanking';
+import { IGameDocument } from '../../models/GameModel';
 
 class MongoRankingRepository implements IRankingRepository {
-  async getRankings(): Promise<any[]> {
-    return Player.aggregate([
-      {
-        $project: {
-          username: 1,
-          successRate: { $divide: ['$gamesWon', '$gamesPlayed'] },
-        },
-      },
-      {
-        $sort: { successRate: -1 },
-      },
-      {
-        $group: {
-          _id: null,
-          players: { $push: '$$ROOT' },
-          averageSuccessRate: { $avg: '$successRate' },
-        },
-      },
-      {
-        $project: {
-          _id: 0,
-          players: 1,
-          averageSuccessRate: 1,
-        },
-      },
-    ]).exec();
+  async getRankings(): Promise<IRanking[]> {
+    const players = await PlayerModel.find()
+      .populate<{ games: IGameDocument[] }>('games')
+      .exec();
+    return players.map(player => {
+      const games = player.games;
+      const successRate = games.length
+        ? games.filter(game => game.result).length / games.length
+        : 0;
+      return {
+        player: player.toObject(),
+        successRate,
+      };
+    });
   }
 
-  async getLoser(): Promise<any> {
-    return Player.findOne().sort({ successRate: 1 }).limit(1);
+  async getLoser(): Promise<IRanking | null> {
+    const players = await this.getRankings();
+    if (players.length === 0) return null;
+    return players.reduce(
+      (min, player) => (player.successRate < min.successRate ? player : min),
+      players[0]
+    );
   }
 
-  async getWinner(): Promise<any> {
-    return Player.findOne().sort({ successRate: -1 }).limit(1);
+  async getWinner(): Promise<IRanking | null> {
+    const players = await this.getRankings();
+    if (players.length === 0) return null;
+    return players.reduce(
+      (max, player) => (player.successRate > max.successRate ? player : max),
+      players[0]
+    );
   }
 }
 

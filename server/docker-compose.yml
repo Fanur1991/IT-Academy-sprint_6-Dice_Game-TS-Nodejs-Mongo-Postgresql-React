@@ -4,10 +4,11 @@ services:
     build: .
     ports:
       - '3002:3002'
+    command: npm run dev
     env_file:
       - .env
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
       - USE_MONGO=${USE_MONGO}
     depends_on:
       - postgres

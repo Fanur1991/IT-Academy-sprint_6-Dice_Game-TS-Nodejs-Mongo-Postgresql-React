@@ -1,9 +1,12 @@
-import { IPlayer } from "../domain/entities/IPlayer";
+import { IPlayer } from '../domain/entities/IPlayer';
+import { CreatePlayerDTO } from '../../application/dto/createPlayer.dto';
+import { UpdatePlayerDTO } from '../../application/dto/updatePlayer.dto';
 
 export interface IPlayerRepository {
-  createPlayer(name: string): Promise<IPlayer>;
-  findPlayerById(id: string): Promise<IPlayer>;
-  updatePlayerName(id: string, name: string): Promise<IPlayer>;
+  createPlayer(data: CreatePlayerDTO): Promise<IPlayer>;
+  // findPlayerById(id: string): Promise<IPlayer>;
+  updatePlayerName(data: UpdatePlayerDTO): Promise<IPlayer>;
   listAllPlayers(): Promise<IPlayer[]>;
-  deleteAllGamesForPlayer(playerId: string): Promise<any>;
+  // deleteAllGamesForPlayer(playerId: string): Promise<{ message: string }>;
+  // findPlayerByEmail(email: string): Promise<IPlayer | null>;
 }

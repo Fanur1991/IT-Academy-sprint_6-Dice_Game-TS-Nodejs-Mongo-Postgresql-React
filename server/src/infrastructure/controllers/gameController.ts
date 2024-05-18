@@ -1,6 +1,8 @@
 // src/controllers/gameController.ts
 import { Request, Response } from 'express';
 import GameService from '../../application/services/gameService';
+import { CreateGameDTO } from '../../application/dto/createGame.dto';
+import { GameDTO } from '../../application/dto/game.dto';
 
 class GameController {
   private gameService: GameService;
@@ -11,16 +13,12 @@ class GameController {
 
   async createGame(req: Request, res: Response): Promise<Response> {
     try {
-      const { playerId, diceOne, diceTwo } = req.body;
-      const game = await this.gameService.createGame(
-        playerId,
-        diceOne,
-        diceTwo
-      );
+      const gameData: CreateGameDTO = req.body;
+      const game = await this.gameService.createGame(gameData);
       return res.status(201).json(game);
     } catch (error) {
       if (error instanceof Error) {
-        return res.status(500).json({ message: error.message });
+        return res.status(400).json({ message: error.message });
       } else {
         return res
           .status(500)
@@ -31,13 +29,14 @@ class GameController {
 
   async listGamesByPlayer(req: Request, res: Response): Promise<Response> {
     try {
-      const games = await this.gameService.listGamesByPlayer(
-        req.params.playerId
+      const playerId: string = req.params.id;
+      const games: GameDTO[] = await this.gameService.listGamesByPlayer(
+        playerId
       );
-      return res.json(games);
+      return res.status(200).json(games);
     } catch (error) {
       if (error instanceof Error) {
-        return res.status(500).json({ message: error.message });
+        return res.status(400).json({ message: error.message });
       } else {
         return res
           .status(500)
@@ -48,13 +47,12 @@ class GameController {
 
   async deleteGamesByPlayer(req: Request, res: Response): Promise<Response> {
     try {
-      const result = await this.gameService.deleteGamesByPlayer(
-        req.params.playerId
-      );
-      return res.json({ message: 'Games deleted', result });
+      const playerId: string = req.params.id;
+      const result = await this.gameService.deleteGamesByPlayer(playerId);
+      return res.status(200).json(result);
     } catch (error) {
       if (error instanceof Error) {
-        return res.status(500).json({ message: error.message });
+        return res.status(400).json({ message: error.message });
       } else {
         return res
           .status(500)

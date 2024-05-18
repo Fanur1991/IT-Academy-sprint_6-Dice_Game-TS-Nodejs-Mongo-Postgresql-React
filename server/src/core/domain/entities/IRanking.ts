@@ -1,7 +1,10 @@
-export interface IRanking {
-  playerId: number;
-  gameId: number;
-  score: number;
+interface IRankingPlayer {
+  id: string;
+  name: string;
   createdAt: Date;
-  updatedAt: Date;
+}
+
+export interface IRanking {
+  player: IRankingPlayer;
+  successRate: number;
 }

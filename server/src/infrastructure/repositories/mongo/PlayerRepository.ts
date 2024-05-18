@@ -1,28 +1,50 @@
-import Player from '../../../infrastructure/models/PlayerModel';
 import { IPlayerRepository } from '../../../core/repositories/IPlayerRepository';
+import { IPlayer } from '../../../core/domain/entities/IPlayer';
+import { PlayerModel } from '../../models/PlayerModel';
+import { CreatePlayerDTO } from '../../../application/dto/createPlayer.dto';
+import { UpdatePlayerDTO } from '../../../application/dto/updatePlayer.dto';
 
 class PlayerRepository implements IPlayerRepository {
-  async createPlayer(data: any): Promise<any> {
-    const player = new Player(data);
+  async createPlayer(data: CreatePlayerDTO): Promise<IPlayer> {
+    const player = new PlayerModel({
+      ...data,
+      createdAt: new Date(),
+    });
     await player.save();
-    return player;
+    return player.toObject() as IPlayer;
   }
 
-  async findPlayerById(id: string): Promise<any> {
-    return Player.findById(id);
+  // async findPlayerById(id: string): Promise<IPlayer> {
+  //   const player = await PlayerModel.findById(id);
+  //   return player ? player.toObject() : null;
+  // }
+
+  async updatePlayerName(data: UpdatePlayerDTO): Promise<IPlayer> {
+    const player = await PlayerModel.findByIdAndUpdate(
+      data.playerId,
+      { name },
+      { new: true }
+    );
+    if (!player) throw new Error('Player not found');
+    return player.toObject() as IPlayer;
   }
 
-  async updatePlayerName(id: string, name: string): Promise<any> {
-    return Player.findByIdAndUpdate(id, { name }, { new: true });
+  async listAllPlayers(): Promise<IPlayer[]> {
+    const players = await PlayerModel.find();
+    return players.map(player => player.toObject() as IPlayer);
   }
 
-  async listAllPlayers(): Promise<any[]> {
-    return Player.find({});
-  }
+  // async deleteAllGamesForPlayer(
+  //   playerId: string
+  // ): Promise<{ message: string }> {
+  //   await GameModel.deleteMany({ playerId });
+  //   return { message: 'All games deleted' };
+  // }
 
-  async deleteAllGamesForPlayer(playerId: string): Promise<any> {
-    return Player.updateMany({ _id: playerId }, { $set: { games: [] } });
-  }
+  // async findPlayerByEmail(email: string): Promise<IPlayer | null> {
+  //   const player = await PlayerModel.findOne({ email });
+  //   return player ? player.toObject() : null;
+  // }
 }
 
 export default PlayerRepository;

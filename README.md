@@ -5,6 +5,10 @@
 | | |-- /dto  
 | | | |-- player.dto.ts
 | | | |-- game.dto.ts
+| | | |-- createGame.dto.ts
+| | | |-- createPlayer.dto.ts
+| | | |-- ranking.dto.ts
+| | | |-- updatePlayer.dto.ts
 |
 | | |-- /services
 | | | |-- playerService.ts
@@ -50,6 +54,9 @@
 | | | |-- playerRoutes.ts
 | | | |-- gameRoutes.ts
 | | | |-- rankingRoutes.ts
+|
+| | |-- /middleware
+| | | |-- authMiddleware.ts
 |
 | | |-- app.ts
 |

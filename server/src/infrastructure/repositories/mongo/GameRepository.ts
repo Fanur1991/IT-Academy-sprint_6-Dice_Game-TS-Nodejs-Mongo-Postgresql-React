@@ -1,25 +1,26 @@
 import Game from '../../models/GameModel';
 import { IGameRepository } from '../../../core/repositories/IGameRepository';
 import { IGame } from '../../../core/domain/entities/IGame';
+import { CreateGameDTO } from '../../../application/dto/createGame.dto';
 
 class GameRepository implements IGameRepository {
-  async createGame(
-    playerId: string,
-    diceOne: number,
-    diceTwo: number
-  ): Promise<IGame> {
-    const result = diceOne + diceTwo === 7;
-    const game = new Game({ playerId, diceOne, diceTwo, result, createdAt });
+  async createGame(data: CreateGameDTO & { result: boolean }): Promise<IGame> {
+    const game = new Game({
+      ...data,
+      createdAt: new Date(),
+    });
     await game.save();
-    return game;
+    return game.toObject() as IGame;
   }
 
   async listGamesByPlayer(playerId: string): Promise<IGame[]> {
-    return Game.find({ playerId });
+    const games = await Game.find({ playerId });
+    return games.map(game => game.toObject() as IGame);
   }
 
-  async deleteGamesByPlayer(playerId: string): Promise<any> {
-    return Game.deleteMany({ playerId });
+  async deleteGamesByPlayer(playerId: string): Promise<{ message: string }> {
+    await Game.deleteMany({ playerId });
+    return { message: 'Games deleted successfully' };
   }
 }
 
