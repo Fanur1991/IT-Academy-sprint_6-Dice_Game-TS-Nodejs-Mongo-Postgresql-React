@@ -1,3 +1,4 @@
+```
 /project-root
 |-- /src
 |
@@ -76,3 +77,4 @@
 |-- .env
 |-- package.json
 |-- tsconfig.json
+```
