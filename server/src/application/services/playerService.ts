@@ -23,6 +23,7 @@ class PlayerService {
       name: player.name,
       email: player.email,
       createdAt: player.createdAt,
+      games: player.games,
       successRate: 0,
     };
   }
@@ -51,6 +52,7 @@ class PlayerService {
       name: player.name,
       email: player.email,
       createdAt: player.createdAt,
+      games: player.games,
       successRate,
     };
   }
@@ -61,6 +63,7 @@ class PlayerService {
 
     for (const player of players) {
       const games = await this.gameRepository.listGamesByPlayer(player.id);
+      // console.log(player.games);
       const successRate = games.length
         ? (games.filter(game => game.result).length / games.length) * 100
         : 0;
@@ -69,6 +72,7 @@ class PlayerService {
         name: player.name,
         email: player.email,
         createdAt: player.createdAt,
+        games: player.games,
         successRate,
       });
     }

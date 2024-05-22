@@ -49,11 +49,11 @@ class PlayerController {
 
   async updatePlayerName(req: Request, res: Response): Promise<Response> {
     try {
-      const playerId: string = req.params.id;
+      const id: string = req.params.id;
       const name: string = req.body.name;
       const data: UpdatePlayerDTO = {
         name,
-        playerId,
+        id,
       };
       const updatedPlayer: PlayerDTO =
         await this.playerService.updatePlayerName(data);

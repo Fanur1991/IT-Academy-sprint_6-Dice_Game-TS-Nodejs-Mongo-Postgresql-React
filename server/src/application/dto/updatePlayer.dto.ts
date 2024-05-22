@@ -1,4 +1,4 @@
 export interface UpdatePlayerDTO {
-  playerId: string;
+  id: string;
   name: string;
 }

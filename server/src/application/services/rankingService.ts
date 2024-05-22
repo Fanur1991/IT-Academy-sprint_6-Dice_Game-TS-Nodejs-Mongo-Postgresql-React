@@ -4,64 +4,44 @@ import { RankingDTO } from '../../application/dto/ranking.dto';
 
 class RankingService {
   private rankingRepository: IRankingRepository;
-  private cache: RankingDTO[] | null = null;
 
   constructor(rankingRepository: IRankingRepository) {
     this.rankingRepository = rankingRepository;
   }
 
-  private async fetchRankings(): Promise<RankingDTO[]> {
-    if (!this.cache) {
-      const rankings = await this.rankingRepository.getRankings();
-      this.cache = rankings.map(ranking => ({
-        player: {
-          id: ranking.player.id,
-          name: ranking.player.name,
-          createdAt: ranking.player.createdAt,
-          successRate: ranking.successRate,
-        },
-      }));
-    }
-    return this.cache;
-  }
-
   async getRankings(): Promise<RankingDTO[]> {
-    return this.fetchRankings();
+    const players = await this.rankingRepository.getRankings();
+    return players
+      .map(player => ({
+        player: {
+          ...player.player,
+          email: player.player.email,
+          password: player.player.password,
+          successRate: player.successRate,
+        },
+      }))
+      .sort((a, b) => b.player.successRate - a.player.successRate);
   }
 
   async getLoser(): Promise<RankingDTO | null> {
-    const rankings = await this.fetchRankings();
-    return (
-      rankings.reduce(
-        (prev, current) =>
-          prev.player.successRate < current.player.successRate ? prev : current,
-        rankings[0]
-      ) || null
-    );
+    const players = await this.rankingRepository.getRankings();
+    if (!players || players.length === 0) return null;
+    return players.sort((a, b) => a.successRate - b.successRate)[0] || null;
   }
 
   async getWinner(): Promise<RankingDTO | null> {
-    const rankings = await this.fetchRankings();
-    return (
-      rankings.reduce(
-        (prev, current) =>
-          prev.player.successRate > current.player.successRate ? prev : current,
-        rankings[0]
-      ) || null
-    );
+    const players = await this.rankingRepository.getRankings();
+    if (!players || players.length === 0) return null;
+    return players.sort((a, b) => b.successRate - a.successRate)[0] || null;
   }
 
   async getAverageSuccessRate(): Promise<number> {
-    const rankings = await this.fetchRankings();
-    const totalSuccessRate = rankings.reduce(
-      (sum, ranking) => sum + ranking.player.successRate,
+    const players = await this.rankingRepository.getRankings();
+    const totalSuccessRate = players.reduce(
+      (sum, player) => sum + player.successRate,
       0
     );
-    return rankings.length ? totalSuccessRate / rankings.length : 0;
-  }
-
-  invalidateCache() {
-    this.cache = null;
+    return players.length ? totalSuccessRate / players.length : 0;
   }
 }
 

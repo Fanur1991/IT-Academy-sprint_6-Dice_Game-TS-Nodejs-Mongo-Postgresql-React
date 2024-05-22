@@ -5,7 +5,7 @@ dotenv.config();
 
 const connectMongoDB = async () => {
   const URI = process.env.MONGO_DB_URI;
-
+  
   if (!URI) {
     console.error('MONGO_DB_URI is not defined.');
     process.exit(1);

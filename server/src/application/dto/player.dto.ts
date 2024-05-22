@@ -1,7 +1,10 @@
+import { GameDTO } from './game.dto';
+
 export interface PlayerDTO {
   id: string;
   name: string;
   email?: string;
   createdAt: Date;
-  successRate: number;
+  games?: GameDTO[];
+  successRate?: number;
 }

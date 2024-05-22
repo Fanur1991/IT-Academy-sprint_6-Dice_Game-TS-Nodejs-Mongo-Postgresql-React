@@ -6,9 +6,13 @@ import { UpdatePlayerDTO } from '../../../application/dto/updatePlayer.dto';
 
 class PlayerRepository implements IPlayerRepository {
   async createPlayer(data: CreatePlayerDTO): Promise<IPlayer> {
-    return prisma.player.create({
+    const player = prisma.player.create({
       data: data,
+      include: {
+        games: true,
+      },
     });
+    return player;
   }
 
   // async findPlayerById(id: string): Promise<any> {
@@ -18,14 +22,23 @@ class PlayerRepository implements IPlayerRepository {
   // }
 
   async updatePlayerName(data: UpdatePlayerDTO): Promise<IPlayer> {
-    return prisma.player.update({
-      where: { id: data.playerId },
+    const player = prisma.player.update({
+      where: { id: data.id },
       data: { name: data.name },
+      include: {
+        games: true,
+      },
     });
+    return player;
   }
 
   async listAllPlayers(): Promise<IPlayer[]> {
-    return prisma.player.findMany({});
+    const players = prisma.player.findMany({
+      include: {
+        games: true,
+      },
+    });
+    return players;
   }
 
   // async deleteAllGamesForPlayer(playerId: string): Promise<any> {

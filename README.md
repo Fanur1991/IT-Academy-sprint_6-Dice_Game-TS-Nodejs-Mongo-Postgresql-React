@@ -20,6 +20,7 @@
 | | | |-- /entities
 | | | | |-- IGame.ts
 | | | | |-- IPlayer.ts
+| | | | |-- IRanking.ts
 |
 | |-- /repositories
 | | |-- IGameRepository.ts
@@ -44,11 +45,11 @@
 | | | |-- /mongo
 | | | | |-- PlayerRepository.ts
 | | | | |-- GameRepository.ts
-| | | | |--RankingRepository.ts
+| | | | |-- RankingRepository.ts
 | | | |-- /postgres
 | | | | |-- PlayerRepository.ts
 | | | | |-- GameRepository.ts
-| | | | |--RankingRepository.ts
+| | | | |-- RankingRepository.ts
 |
 | | |-- /routes
 | | | |-- playerRoutes.ts

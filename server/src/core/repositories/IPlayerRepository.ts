@@ -4,9 +4,9 @@ import { UpdatePlayerDTO } from '../../application/dto/updatePlayer.dto';
 
 export interface IPlayerRepository {
   createPlayer(data: CreatePlayerDTO): Promise<IPlayer>;
-  // findPlayerById(id: string): Promise<IPlayer>;
   updatePlayerName(data: UpdatePlayerDTO): Promise<IPlayer>;
   listAllPlayers(): Promise<IPlayer[]>;
+  // findPlayerById(id: string): Promise<IPlayer>;
   // deleteAllGamesForPlayer(playerId: string): Promise<{ message: string }>;
   // findPlayerByEmail(email: string): Promise<IPlayer | null>;
 }

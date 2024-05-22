@@ -1,48 +1,46 @@
 import { IRankingRepository } from '../../../core/repositories/IRankingRepository';
 import { prisma } from '../../config/prismaConfig';
 import { IRanking } from '../../../core/domain/entities/IRanking';
-import { IGame } from '../../../core/domain/entities/IGame';
-import { IPlayer } from '../../../core/domain/entities/IPlayer';
 
 class PostgresRankingRepository implements IRankingRepository {
   async getRankings(): Promise<IRanking[]> {
-    const players = (await prisma.player.findMany({
+    const players = await prisma.player.findMany({
       include: {
         games: true,
       },
-    })) as IPlayer[];
-    return players.map(player => {
-      const successRate = player.games?.length
-        ? player.games.filter((game: IGame) => game.result).length /
-          player.games.length
-        : 0;
-      return {
-        player: {
-          id: player.id,
-          name: player.name,
-          createdAt: player.createdAt,
-        },
-        successRate,
-      };
     });
+    return players.map(player => ({
+      player: {
+        id: player.id,
+        name: player.name,
+        email: player.email,
+        password: player.password,
+        createdAt: player.createdAt,
+      },
+      successRate: player.games.length
+        ? (player.games.filter(game => game.result).length /
+            player.games.length) *
+          100
+        : 0,
+    }));
   }
 
   async getLoser(): Promise<IRanking | null> {
     const players = await this.getRankings();
-    if (players.length === 0) return null;
-    return players.reduce(
-      (min, player) => (player.successRate < min.successRate ? player : min),
-      players[0]
-    );
+    return players.length
+      ? players.reduce((min, player) =>
+          player.successRate < min.successRate ? player : min
+        )
+      : null;
   }
 
   async getWinner(): Promise<IRanking | null> {
     const players = await this.getRankings();
-    if (players.length === 0) return null;
-    return players.reduce(
-      (max, player) => (player.successRate > max.successRate ? player : max),
-      players[0]
-    );
+    return players.length
+      ? players.reduce((max, player) =>
+          player.successRate > max.successRate ? player : max
+        )
+      : null;
   }
 }
 

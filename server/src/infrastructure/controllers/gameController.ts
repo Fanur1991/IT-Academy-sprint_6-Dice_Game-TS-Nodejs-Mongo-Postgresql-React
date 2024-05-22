@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import GameService from '../../application/services/gameService';
 import { CreateGameDTO } from '../../application/dto/createGame.dto';
 import { GameDTO } from '../../application/dto/game.dto';
+import { getRandomInt } from '../../utils/getRandomInt';
 
 class GameController {
   private gameService: GameService;
@@ -13,7 +14,10 @@ class GameController {
 
   async createGame(req: Request, res: Response): Promise<Response> {
     try {
-      const gameData: CreateGameDTO = req.body;
+      const playerId: string = req.params.id;
+      const diceOne: number = getRandomInt(1, 7);
+      const diceTwo: number = getRandomInt(1, 7);
+      const gameData: CreateGameDTO = { playerId, diceOne, diceTwo };
       const game = await this.gameService.createGame(gameData);
       return res.status(201).json(game);
     } catch (error) {

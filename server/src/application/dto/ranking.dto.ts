@@ -1,5 +1,6 @@
-import { PlayerDTO } from './player.dto';
+import { CreatePlayerDTO } from './createPlayer.dto';
+// import { PlayerDTO } from './player.dto';
 
 export interface RankingDTO {
-  player: PlayerDTO;
+  player: CreatePlayerDTO;
 }

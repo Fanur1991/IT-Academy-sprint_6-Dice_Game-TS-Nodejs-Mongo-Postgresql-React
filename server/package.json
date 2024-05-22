@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev src/index.ts",
-    "start": "tsc --watch && nodemon --inspect dist/index.js",
+    "start": "concurrently \"tsc --watch\" \"nodemon dist/index.js\"",
     "tsc": "tsc",
     "tsc:watch": "tsc -watch",
     "test": "jest"
@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.13.0",
+    "concurrently": "^8.2.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",

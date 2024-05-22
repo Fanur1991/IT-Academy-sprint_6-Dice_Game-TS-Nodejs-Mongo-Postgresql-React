@@ -59,21 +59,21 @@ class RankingController {
     }
   }
 
-  async getAverageSuccessRate(_req: Request, res: Response): Promise<Response> {
-    try {
-      const averageSuccessRate =
-        await this.rankingService.getAverageSuccessRate();
-      return res.status(200).json({ averageSuccessRate });
-    } catch (error) {
-      if (error instanceof Error) {
-        return res.status(400).json({ message: error.message });
-      } else {
-        return res
-          .status(500)
-          .json({ message: 'An unexpected error occurred' });
-      }
-    }
-  }
+  // async getAverageSuccessRate(_req: Request, res: Response): Promise<Response> {
+  //   try {
+  //     const averageSuccessRate =
+  //       await this.rankingService.getAverageSuccessRate();
+  //     return res.status(200).json({ averageSuccessRate });
+  //   } catch (error) {
+  //     if (error instanceof Error) {
+  //       return res.status(400).json({ message: error.message });
+  //     } else {
+  //       return res
+  //         .status(500)
+  //         .json({ message: 'An unexpected error occurred' });
+  //     }
+  //   }
+  // }
 }
 
 export default RankingController;

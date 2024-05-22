@@ -1,10 +1,11 @@
 import { Schema, model, Document } from 'mongoose';
+import { IGameDocument } from './GameModel';
 
 export interface IPlayerDocument extends Document {
   name: string;
   email: string;
   password: string;
-  games: string[];
+  games: IGameDocument[];
   createdAt: Date;
 }
 
@@ -16,4 +17,6 @@ const playerSchema: Schema = new Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-export const PlayerModel = model<IPlayerDocument>('Player', playerSchema);
+const PlayerModel = model<IPlayerDocument>('Player', playerSchema);
+
+export default PlayerModel;

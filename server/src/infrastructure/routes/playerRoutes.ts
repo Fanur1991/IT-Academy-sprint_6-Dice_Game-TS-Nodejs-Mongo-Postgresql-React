@@ -1,7 +1,10 @@
 import { Router } from 'express';
 import PlayerController from '../controllers/playerController';
 import PlayerService from '../../application/services/playerService';
-import { getPlayerRepository, getGameRepository } from '../../utils/getRepository';
+import {
+  getPlayerRepository,
+  getGameRepository,
+} from '../../utils/getRepository';
 
 const router = Router();
 const playerRepository = getPlayerRepository();
