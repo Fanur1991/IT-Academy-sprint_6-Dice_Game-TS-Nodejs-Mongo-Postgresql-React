@@ -1,7 +1,6 @@
-export interface RankingDTO {
+export interface LoginPlayerDTO {
   id: string;
   name: string;
   email: string;
   password: string;
-  successRate: number;
 }

@@ -10,13 +10,12 @@ class PostgresRankingRepository implements IRankingRepository {
       },
     });
     return players.map(player => ({
-      player: {
-        id: player.id,
-        name: player.name,
-        email: player.email,
-        password: player.password,
-        createdAt: player.createdAt,
-      },
+      id: player.id,
+      name: player.name,
+      email: player.email,
+      password: player.password,
+      createdAt: player.createdAt,
+
       successRate: player.games.length
         ? (player.games.filter(game => game.result).length /
             player.games.length) *

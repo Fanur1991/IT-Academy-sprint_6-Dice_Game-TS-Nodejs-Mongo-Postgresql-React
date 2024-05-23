@@ -3,6 +3,7 @@ import { IGameRepository } from '../../core/repositories/IGameRepository';
 import { CreatePlayerDTO } from '../dto/createPlayer.dto';
 import { UpdatePlayerDTO } from '../dto/updatePlayer.dto';
 import { PlayerDTO } from '../dto/player.dto';
+import { LoginPlayerDTO } from '../dto/loginPlayer.dto';
 
 class PlayerService {
   private playerRepository: IPlayerRepository;
@@ -28,18 +29,18 @@ class PlayerService {
     };
   }
 
-  // async findPlayerByEmail(email: string): Promise<PlayerDTO | null> {
-  //   const player = await this.playerRepository.findPlayerByEmail(email);
-  //   if (!player) {
-  //     return null;
-  //   }
-  //   return {
-  //     id: player.id,
-  //     name: player.name,
-  //     email: player.email,
-  //     createdAt: player.createdAt
-  //   };
-  // }
+  async findPlayerByEmail(email: string): Promise<LoginPlayerDTO | null> {
+    const player = await this.playerRepository.findPlayerByEmail(email);
+    if (!player) {
+      return null;
+    }
+    return {
+      id: player.id,
+      name: player.name,
+      email: player.email,
+      password: player.password,
+    };
+  }
 
   async updatePlayerName(data: UpdatePlayerDTO): Promise<PlayerDTO> {
     const player = await this.playerRepository.updatePlayerName(data);
@@ -63,7 +64,6 @@ class PlayerService {
 
     for (const player of players) {
       const games = await this.gameRepository.listGamesByPlayer(player.id);
-      // console.log(player.games);
       const successRate = games.length
         ? (games.filter(game => game.result).length / games.length) * 100
         : 0;
@@ -79,10 +79,6 @@ class PlayerService {
 
     return playerDTOs;
   }
-
-  // async deleteAllGamesForPlayer(playerId: string): Promise<void> {
-  //   await this.playerRepository.deleteAllGamesForPlayer(playerId);
-  // }
 }
 
 export default PlayerService;

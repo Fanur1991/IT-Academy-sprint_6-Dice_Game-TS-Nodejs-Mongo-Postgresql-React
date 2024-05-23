@@ -1,9 +1,14 @@
+docker-compose run app npx prisma generate
+docker-compose run app npx prisma migrate dev --name init
+docker-compose build --no-cache
+docker compose up
+
 ```
-/project-root
+/server
 |-- /src
 |
 | |-- /application
-| | |-- /dto  
+| | |-- /dto
 | | | |-- player.dto.ts
 | | | |-- game.dto.ts
 | | | |-- createGame.dto.ts
@@ -70,6 +75,7 @@
 |
 | |-- /utils
 | | |-- getRepository.ts
+| | |-- getRandomInt.ts
 |
 |-- /prisma
 | |-- schema.prisma
@@ -77,4 +83,8 @@
 |-- .env
 |-- package.json
 |-- tsconfig.json
+|-- jest.config.json
+|-- Dockerfile
+|-- docker-compose.yml
+|-- .gitignore
 ```

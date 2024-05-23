@@ -9,13 +9,11 @@ class MongoRankingRepository implements IRankingRepository {
       games: IGameDocument[];
     }>('games');
     return players.map(player => ({
-      player: {
-        id: player.id,
-        name: player.name,
-        email: player.email,
-        password: player.password,
-        createdAt: player.createdAt,
-      },
+      id: player.id,
+      name: player.name,
+      email: player.email,
+      password: player.password,
+      createdAt: player.createdAt,
       successRate: this.calculateSuccessRate(player.games as IGameDocument[]),
     }));
   }

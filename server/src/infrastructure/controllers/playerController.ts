@@ -1,21 +1,38 @@
 import { Request, Response } from 'express';
 import PlayerService from '../../application/services/playerService';
+import { AuthService } from '../../application/services/authService';
 import { CreatePlayerDTO } from '../../application/dto/createPlayer.dto';
 import { UpdatePlayerDTO } from '../../application/dto/updatePlayer.dto';
 import { PlayerDTO } from '../../application/dto/player.dto';
 
 class PlayerController {
   private playerService: PlayerService;
+  private authService: AuthService;
 
-  constructor(playerService: PlayerService) {
+  constructor(playerService: PlayerService, authService: AuthService) {
     this.playerService = playerService;
+    this.authService = authService;
   }
 
   async createPlayer(req: Request, res: Response): Promise<Response> {
     try {
-      const playerData: CreatePlayerDTO = req.body;
+      const { name, email, password } = req.body as CreatePlayerDTO;
+
+      // Hash password
+      const hashedPassword = await this.authService.hashPassword(password);
+      const playerData = { name, email, password: hashedPassword };
+
       const player = await this.playerService.createPlayer(playerData);
-      return res.status(201).json(player);
+
+      // Generate token
+      const token = this.authService.generateToken(player.id);
+
+      return res.status(201).json({
+        id: player.id,
+        name: player.name,
+        email: player.email,
+        token,
+      });
     } catch (error) {
       if (error instanceof Error) {
         return res.status(400).json({ message: error.message });
@@ -26,26 +43,6 @@ class PlayerController {
       }
     }
   }
-
-  // async getPlayerById(req: Request, res: Response): Promise<Response> {
-  //   try {
-  //     const id = req.params.id;
-  //     const player = await this.playerService.findPlayerById(id);
-  //     if (player) {
-  //       return res.json(player);
-  //     } else {
-  //       return res.status(404).json({ message: 'Player not found' });
-  //     }
-  //   } catch (error) {
-  //     if (error instanceof Error) {
-  //       return res.status(500).json({ message: error.message });
-  //     } else {
-  //       return res
-  //         .status(500)
-  //         .json({ message: 'An unexpected error occurred' });
-  //     }
-  //   }
-  // }
 
   async updatePlayerName(req: Request, res: Response): Promise<Response> {
     try {
@@ -69,23 +66,6 @@ class PlayerController {
     }
   }
 
-  // async updatePlayerName (req: Request, res: Response): Promise<Response> {
-  //   const playerId: string = req.params.id;
-  //   const updateData: UpdatePlayerDTO = req.body;
-  //   try {
-  //     const updatedPlayer: PlayerDTO = await this.playerService.updatePlayerName(playerId, updateData.name);
-  //     return res.status(200).json(updatedPlayer);
-  //   } catch (error) {
-  //     if (error instanceof Error) {
-  //             return res.status(400).json({ message: error.message });
-  //           } else {
-  //             return res
-  //               .status(500)
-  //               .json({ message: 'An unexpected error occurred' });
-  //           }
-  //   }
-  // };
-
   async listAllPlayers(_req: Request, res: Response): Promise<Response> {
     try {
       const players: PlayerDTO[] = await this.playerService.listAllPlayers();
@@ -101,24 +81,22 @@ class PlayerController {
     }
   }
 
-  //   async deleteAllGamesForPlayer(
-  //     req: Request,
-  //     res: Response
-  //   ): Promise<Response> {
-  //     try {
-  //       const id = req.params.id;
-  //       const player = await this.playerService.deleteAllGamesForPlayer(id);
-  //       return res.json(player);
-  //     } catch (error) {
-  //       if (error instanceof Error) {
-  //         return res.status(500).json({ message: error.message });
-  //       } else {
-  //         return res
-  //           .status(500)
-  //           .json({ message: 'An unexpected error occurred' });
-  //       }
-  //     }
-  //   }
+  async login(req: Request, res: Response): Promise<Response> {
+    const { email, password } = req.body as { email: string; password: string };
+    const player = await this.playerService.findPlayerByEmail(email);
+
+    console.log(player);
+    if (
+      player &&
+      (await this.authService.comparePasswords(password, player.password))
+    ) {
+      const token = this.authService.generateToken(player.id);
+
+      return res.json({ ...player, token });
+    } else {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+  }
 }
 
 export default PlayerController;

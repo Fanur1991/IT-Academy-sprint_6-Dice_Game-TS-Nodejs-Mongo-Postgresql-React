@@ -40,3 +40,7 @@
 .read-the-docs {
   color: #888;
 }
+
+.ant-list .ant-list-header {
+  padding: 0;
+}

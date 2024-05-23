@@ -8,5 +8,5 @@ export interface IPlayerRepository {
   listAllPlayers(): Promise<IPlayer[]>;
   // findPlayerById(id: string): Promise<IPlayer>;
   // deleteAllGamesForPlayer(playerId: string): Promise<{ message: string }>;
-  // findPlayerByEmail(email: string): Promise<IPlayer | null>;
+  findPlayerByEmail(email: string): Promise<IPlayer | null>;
 }

@@ -10,8 +10,6 @@ COPY prisma ./prisma/
 
 COPY . .
 
-RUN npx prisma generate
-
 RUN npm run tsc
 
 EXPOSE 3002

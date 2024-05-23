@@ -7,4 +7,5 @@ export interface PlayerDTO {
   createdAt: Date;
   games?: GameDTO[];
   successRate?: number;
+  password?: string | null;
 }

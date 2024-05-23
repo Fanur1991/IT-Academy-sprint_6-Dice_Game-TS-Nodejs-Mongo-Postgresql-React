@@ -13,14 +13,12 @@ class RankingService {
     const players = await this.rankingRepository.getRankings();
     return players
       .map(player => ({
-        player: {
-          ...player.player,
-          email: player.player.email,
-          password: player.player.password,
-          successRate: player.successRate,
-        },
+        ...player,
+        email: player.email,
+        password: player.password,
+        successRate: player.successRate,
       }))
-      .sort((a, b) => b.player.successRate - a.player.successRate);
+      .sort((a, b) => b.successRate - a.successRate);
   }
 
   async getLoser(): Promise<RankingDTO | null> {
@@ -35,14 +33,14 @@ class RankingService {
     return players.sort((a, b) => b.successRate - a.successRate)[0] || null;
   }
 
-  async getAverageSuccessRate(): Promise<number> {
-    const players = await this.rankingRepository.getRankings();
-    const totalSuccessRate = players.reduce(
-      (sum, player) => sum + player.successRate,
-      0
-    );
-    return players.length ? totalSuccessRate / players.length : 0;
-  }
+  // async getAverageSuccessRate(): Promise<number> {
+  //   const players = await this.rankingRepository.getRankings();
+  //   const totalSuccessRate = players.reduce(
+  //     (sum, player) => sum + player.successRate,
+  //     0
+  //   );
+  //   return players.length ? totalSuccessRate / players.length : 0;
+  // }
 }
 
 export default RankingService;

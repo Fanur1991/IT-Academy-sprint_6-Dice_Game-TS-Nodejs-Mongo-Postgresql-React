@@ -1,12 +1,12 @@
 import { IPlayerRepository } from '../../../core/repositories/IPlayerRepository';
 import { IPlayer } from '../../../core/domain/entities/IPlayer';
-import PlayerModel from '../../models/PlayerModel';
+import Player from '../../models/PlayerModel';
 import { CreatePlayerDTO } from '../../../application/dto/createPlayer.dto';
 import { UpdatePlayerDTO } from '../../../application/dto/updatePlayer.dto';
 
 class PlayerRepository implements IPlayerRepository {
   async createPlayer(data: CreatePlayerDTO): Promise<IPlayer> {
-    const player = new PlayerModel({
+    const player = new Player({
       ...data,
       createdAt: new Date(),
     });
@@ -20,7 +20,7 @@ class PlayerRepository implements IPlayerRepository {
   // }
 
   async updatePlayerName(data: UpdatePlayerDTO): Promise<IPlayer> {
-    const player = await PlayerModel.findByIdAndUpdate(
+    const player = await Player.findByIdAndUpdate(
       data.id,
       { name: data.name },
       { new: true }
@@ -30,8 +30,7 @@ class PlayerRepository implements IPlayerRepository {
   }
 
   async listAllPlayers(): Promise<IPlayer[]> {
-    const players = await PlayerModel.find({}).populate('games');
-    console.log(players);
+    const players = await Player.find().populate('games');
 
     return players.map(player => player.toObject({ getters: true }) as IPlayer);
   }
@@ -43,10 +42,10 @@ class PlayerRepository implements IPlayerRepository {
   //   return { message: 'All games deleted' };
   // }
 
-  // async findPlayerByEmail(email: string): Promise<IPlayer | null> {
-  //   const player = await PlayerModel.findOne({ email });
-  //   return player ? player.toObject() : null;
-  // }
+  async findPlayerByEmail(email: string): Promise<IPlayer | null> {
+    const player = await Player.findOne({ email });
+    return player ? player.toObject({ getters: true }) : null;
+  }
 }
 
 export default PlayerRepository;

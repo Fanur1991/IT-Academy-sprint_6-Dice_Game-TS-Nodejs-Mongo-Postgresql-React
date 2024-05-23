@@ -1,10 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { AuthService } from '../../application/services/authService';
 
 dotenv.config();
 
-export const authenticateJWT = async (
+const authService = new AuthService();
+
+export const requireAuth = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -17,19 +19,7 @@ export const authenticateJWT = async (
   }
 
   try {
-    const user = await new Promise((resolve, reject) => {
-      jwt.verify(
-        token,
-        process.env.JWT_SECRET as string,
-        (err, decodedToken) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(decodedToken);
-          }
-        }
-      );
-    });
+    const user = await authService.verifyToken(token);
 
     (req as any).user = user;
     next();
