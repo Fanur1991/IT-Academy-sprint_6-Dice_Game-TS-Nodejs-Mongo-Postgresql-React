@@ -14,7 +14,9 @@ class MongoRankingRepository implements IRankingRepository {
       email: player.email,
       password: player.password,
       createdAt: player.createdAt,
-      successRate: this.calculateSuccessRate(player.games as IGameDocument[]),
+      successRate: +this.calculateSuccessRate(
+        player.games as IGameDocument[]
+      ).toFixed(2),
     }));
   }
 

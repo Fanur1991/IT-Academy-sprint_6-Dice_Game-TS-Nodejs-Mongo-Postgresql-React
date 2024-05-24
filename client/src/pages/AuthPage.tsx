@@ -40,6 +40,7 @@ const MainPage: React.FC = () => {
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         console.log('Login error:', error.response.data);
+        message.error(error.response.data.message);
       } else {
         console.log('Unexpected error:', error);
       }

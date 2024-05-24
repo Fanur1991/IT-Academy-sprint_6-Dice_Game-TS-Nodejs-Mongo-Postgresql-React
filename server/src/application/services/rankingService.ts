@@ -24,12 +24,12 @@ class RankingService {
   async getRankings(): Promise<any> {
     const players = await this.rankingRepository.getRankings();
     const sortedPlayers = players.sort((a, b) => b.successRate - a.successRate);
-    // const averageSuccessRate =
-    //   players.reduce((sum, player) => sum + player.successRate, 0) /
-    //   players.length;
+    const averageSuccessRate =
+      players.reduce((sum, player) => sum + player.successRate, 0) /
+      players.length;
     return {
       players: sortedPlayers,
-      averageSuccessRate: this.getAverageSuccessRate(),
+      averageSuccessRate: +averageSuccessRate.toFixed(2),
     };
   }
 
@@ -45,13 +45,13 @@ class RankingService {
     return players.sort((a, b) => b.successRate - a.successRate)[0] || null;
   }
 
-  async getAverageSuccessRate(): Promise<number> {
-    const players = await this.rankingRepository.getRankings();
-    const averageSuccessRate =
-      players.reduce((sum, player) => sum + player.successRate, 0) /
-      players.length;
-    return averageSuccessRate;
-  }
+  // async getAverageSuccessRate(): Promise<number> {
+  //   const players = await this.rankingRepository.getRankings();
+  //   const averageSuccessRate =
+  //     players.reduce((sum, player) => sum + player.successRate, 0) /
+  //     players.length;
+  //   return averageSuccessRate;
+  // }
 }
 
 export default RankingService;

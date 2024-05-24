@@ -1,5 +1,5 @@
 import { Flex, Space, Layout, ConfigProvider } from 'antd';
-import { LogoutOutlined } from '@ant-design/icons';
+import { LogoutOutlined, RiseOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.svg';
 
@@ -26,6 +26,12 @@ const AppHeader = () => {
             },
           }}
         >
+          <Link style={{ color: '#B37FEB' }} to="/ranking">
+            <Space>
+              Ranking
+              <RiseOutlined />
+            </Space>
+          </Link>
           <Link onClick={handleButton} style={{ color: '#B37FEB' }} to="/login">
             <Space>
               Logout
