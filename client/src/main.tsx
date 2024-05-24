@@ -25,7 +25,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           List: {
             padding: 0,
             itemPaddingSM: '0 0 0 0',
-          }
+          },
         },
       }}
     >

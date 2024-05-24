@@ -1,7 +1,7 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding-bottom: 2rem;
   text-align: center;
 }
 
@@ -43,4 +43,23 @@
 
 .ant-list .ant-list-header {
   padding: 0;
+}
+
+.ant-btn-link {
+  color: #b37feb;
+}
+
+.ant-btn-link:not(:disabled):not(.ant-btn-disabled):hover {
+  color: #b37feb;
+  border: none;
+}
+
+.ant-btn-link:not(:disabled):not(.ant-btn-disabled):active {
+  color: #b37feb;
+  border: none;
+}
+
+button:focus,
+button:focus-visible {
+  outline: none !important;
 }

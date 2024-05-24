@@ -9,11 +9,18 @@ import {
   Input,
   message,
   List,
+  ConfigProvider,
+  Space,
 } from 'antd';
-import { RollbackOutlined, CheckOutlined } from '@ant-design/icons';
+import {
+  RollbackOutlined,
+  CheckOutlined,
+  DeleteOutlined,
+} from '@ant-design/icons';
 import axios from 'axios';
 import { fetchPlayers } from '../data/fetchPlayers';
 import { fetchPlayerGames } from '../data/fetchPlayerGames';
+import AppHeader from '../components/Header';
 
 const { Title } = Typography;
 
@@ -71,6 +78,15 @@ const MainPage: React.FC = () => {
       setDiceOne(response.data.diceOne);
       setDiceTwo(response.data.diceTwo);
       setResult(response.data.result);
+
+      setPlayerGames(prevGames => [
+        {
+          diceOne: response.data.diceOne,
+          diceTwo: response.data.diceTwo,
+          result: response.data.result,
+        },
+        ...prevGames,
+      ]);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         console.log('Dice roll error:', error.response.data);
@@ -110,8 +126,34 @@ const MainPage: React.FC = () => {
     }
   };
 
+  const handleDeleteButton = async () => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:3002/api/games/${playerId}`,
+        {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        }
+      );
+
+      console.log('Player games deleted successfully:', response.status);
+
+      if (response.status === 200) {
+        setPlayerGames([]);
+      }
+
+      console.log('Player games deleted successfully:', response.data);
+      message.success('Player games deleted successfully!');
+    } catch (error) {
+      console.error('Failed to delete player games:', error);
+      message.error('Failed to delete player games.');
+    }
+  };
+
   return (
     <>
+      <AppHeader />
       <Title style={{ color: '#597ef7', margin: '30px 0' }} level={2}>
         The Dice Game
       </Title>
@@ -165,23 +207,45 @@ const MainPage: React.FC = () => {
             </Card>
           </Col>
         </Row>
-        <Button type="primary" onClick={rollDice} disabled={rolling}>
-          {rolling ? 'Rolling...' : 'Roll Dice'}
-        </Button>
+        <ConfigProvider
+          theme={{
+            components: {
+              Button: {
+                colorPrimary: '#b37feb',
+                colorPrimaryHover: '#b37feb',
+                colorPrimaryActive: '#b37feb',
+              },
+            },
+          }}
+        >
+          <Button type="primary" onClick={rollDice} disabled={rolling}>
+            {rolling ? 'Rolling...' : 'Roll Dice'}
+          </Button>
+        </ConfigProvider>
       </div>
       <div
         style={{
-          backgroundColor: '#f9f0ff',
+          backgroundColor: '#f5f5f5',
           borderRadius: '10px',
-          padding: '20px',
-          maxWidth: '1000px',
+          maxWidth: '500px',
           margin: '0 auto',
         }}
       >
         <List
           style={{ padding: 0 }}
           size="small"
-          header={<Title level={4}>{playerName}'s Games</Title>}
+          header={
+            <Space size="small">
+              <Title style={{ padding: 10, margin: 0 }} level={4}>
+                {playerName}'s Games
+              </Title>
+              <Button
+                onClick={handleDeleteButton}
+                type="link"
+                icon={<DeleteOutlined />}
+              ></Button>
+            </Space>
+          }
           pagination={{ pageSize: 5 }}
           itemLayout="horizontal"
           dataSource={playerGames}
@@ -190,7 +254,11 @@ const MainPage: React.FC = () => {
               <List.Item.Meta
                 key={index}
                 title={
-                  <Title type={item.result ? 'success' : 'danger'} level={5}>
+                  <Title
+                    style={{ padding: 0, margin: 0 }}
+                    type={item.result ? 'success' : 'danger'}
+                    level={5}
+                  >
                     {item.result ? 'Win' : 'Lose'}
                   </Title>
                 }
