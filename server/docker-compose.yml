@@ -20,8 +20,8 @@ services:
   postgres:
     container_name: postgresserver
     image: postgres:16.0-alpine
-    # env_file:
-    #   - .env
+    env_file:
+      - .env
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=username
@@ -36,8 +36,8 @@ services:
   mongo:
     container_name: mongodbserver
     image: mongo:7.0.9-jammy
-    # env_file:
-    #   - .env
+    env_file:
+      - .env
     environment:
       - MONGO_INITDB_DATABASE=mongodb
     ports:

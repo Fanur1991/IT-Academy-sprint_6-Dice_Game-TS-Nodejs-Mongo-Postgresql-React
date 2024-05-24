@@ -85,7 +85,6 @@ class PlayerController {
     const { email, password } = req.body as { email: string; password: string };
     const player = await this.playerService.findPlayerByEmail(email);
 
-    console.log(player);
     if (
       player &&
       (await this.authService.comparePasswords(password, player.password))

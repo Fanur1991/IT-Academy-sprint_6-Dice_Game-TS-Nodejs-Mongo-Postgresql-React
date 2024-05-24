@@ -1,26 +1,22 @@
 import { IRankingRepository } from '../../../core/repositories/IRankingRepository';
 import { prisma } from '../../config/prismaConfig';
 import { IRanking } from '../../../core/domain/entities/IRanking';
+import { IGameDocument } from '../../models/GameModel';
 
 class PostgresRankingRepository implements IRankingRepository {
   async getRankings(): Promise<IRanking[]> {
-    const players = await prisma.player.findMany({
+    const players = (await prisma.player.findMany({
       include: {
         games: true,
       },
-    });
+    })) as any[];
     return players.map(player => ({
       id: player.id,
       name: player.name,
       email: player.email,
       password: player.password,
       createdAt: player.createdAt,
-
-      successRate: player.games.length
-        ? (player.games.filter(game => game.result).length /
-            player.games.length) *
-          100
-        : 0,
+      successRate: this.calculateSuccessRate(player.games as IGameDocument[]),
     }));
   }
 
@@ -40,6 +36,11 @@ class PostgresRankingRepository implements IRankingRepository {
           player.successRate > max.successRate ? player : max
         )
       : null;
+  }
+
+  private calculateSuccessRate(games: IGameDocument[]): number {
+    const wins = games.filter(game => game.result).length;
+    return games.length > 0 ? (wins / games.length) * 100 : 0;
   }
 }
 

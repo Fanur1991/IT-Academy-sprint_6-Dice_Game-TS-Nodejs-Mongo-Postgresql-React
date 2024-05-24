@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Tabs, Typography, ConfigProvider } from 'antd';
+import {
+  Form,
+  Input,
+  Button,
+  Tabs,
+  Typography,
+  ConfigProvider,
+  message,
+} from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {
   UserOutlined,
@@ -56,6 +64,7 @@ const MainPage: React.FC = () => {
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         console.log('Registration error:', error.response.data);
+        message.error(error.response.data.message);
       } else {
         console.log('Unexpected error:', error);
       }

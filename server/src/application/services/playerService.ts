@@ -18,6 +18,10 @@ class PlayerService {
   }
 
   async createPlayer(data: CreatePlayerDTO): Promise<PlayerDTO> {
+    if (!data.name) {
+      data.name = 'ANONYMOUS';
+    }
+
     const player = await this.playerRepository.createPlayer(data);
     return {
       id: player.id,

@@ -25,12 +25,6 @@ class PlayerRepository implements IPlayerRepository {
     return player;
   }
 
-  // async findPlayerById(id: string): Promise<any> {
-  //   return prisma.player.findUnique({
-  //     where: { id: String(id) },
-  //   });
-  // }
-
   async updatePlayerName(data: UpdatePlayerDTO): Promise<IPlayer> {
     const player = prisma.player.update({
       where: { id: data.id },
@@ -50,12 +44,6 @@ class PlayerRepository implements IPlayerRepository {
     });
     return players;
   }
-
-  // async deleteAllGamesForPlayer(playerId: string): Promise<any> {
-  //   return prisma.game.deleteMany({
-  //     where: { playerId: String(playerId) },
-  //   });
-  // }
 }
 
 export default PlayerRepository;

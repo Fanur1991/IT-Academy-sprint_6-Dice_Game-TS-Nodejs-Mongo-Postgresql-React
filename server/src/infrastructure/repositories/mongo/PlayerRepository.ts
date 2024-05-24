@@ -31,7 +31,6 @@ class PlayerRepository implements IPlayerRepository {
 
   async listAllPlayers(): Promise<IPlayer[]> {
     const players = await Player.find().populate('games');
-
     return players.map(player => player.toObject({ getters: true }) as IPlayer);
   }
 
