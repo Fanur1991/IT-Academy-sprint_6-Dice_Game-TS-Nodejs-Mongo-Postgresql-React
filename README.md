@@ -3,8 +3,13 @@ docker-compose run app npx prisma migrate dev --name init
 docker-compose build --no-cache
 docker compose up
 
-<![Home page](./home.png)>
+## Login page
+
 <![Login page](./login.png)>
+
+## Home page
+
+<![Home page](./home.png)>
 
 ```
 /server
