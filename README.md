@@ -47,7 +47,7 @@ To switch between MongoDB and PostgreSQL, you need to update the .env file. Set 
 
 ### Steps to Start the application
 
-## `Download The Project`
+### `Download The Project`
 
 ```
 git clone https://github.com/Fanur1991/IT-Academy-sprint_6-Dice_Game-TS-Nodejs-Mongo-Postgresql-React.git
