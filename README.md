@@ -1,11 +1,20 @@
 # Dice Game Full-Stack Application
 
-This repository contains a full-stack application for a dice game. This project integrates both frontend and backend components to provide a comprehensive gaming experience. The application allows users to register, login, play the dice game, and view various statistics.
+Dice game using clean architecture and a lot of techonologies. You will win the game if you get a 7, any other result will be a lost game. This project integrates both frontend and backend components with two databases (MongoDB and PostgreSQL). The application allows users to register, login, play the dice game, and view various statistics.
 
-## Game Rules
+## Technologies
 
-- The game is played with two six-sided dice.
-- Players win if the sum of the dice is 7; otherwise, they lose.
+![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Node.js](https://img.shields.io/badge/-Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/-Express-000000?style=flat-square&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/-MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)
+![Mongoose](https://img.shields.io/badge/-Mongoose-880000?style=flat-square&logo=mongoose&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white)
+![Prisma](https://img.shields.io/badge/-Prisma-2D3748?style=flat-square&logo=prisma&logoColor=white)
+![React](https://img.shields.io/badge/-React-61DAFB?style=flat-square&logo=react&logoColor=black)
+![Ant Design](https://img.shields.io/badge/-Ant_Design-0170FE?style=flat-square&logo=antdesign&logoColor=white)
+![Jest](https://img.shields.io/badge/-Jest-C21325?style=flat-square&logo=jest&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/-GitHub_Actions-2088FF?style=flat-square&logo=github-actions&logoColor=white)
 
 ## Player Registration and Management
 
