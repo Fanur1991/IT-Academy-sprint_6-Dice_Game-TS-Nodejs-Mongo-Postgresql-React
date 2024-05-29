@@ -16,6 +16,7 @@ const USE_MONGO = process.env.USE_MONGO;
     await connectMongoDB();
   } else {
     new PrismaClient();
+    console.log('Connected to PostgreSQL with Prisma');
   }
 
   app.listen(PORT, () => {

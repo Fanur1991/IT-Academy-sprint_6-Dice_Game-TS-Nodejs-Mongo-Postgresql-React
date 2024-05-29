@@ -21,7 +21,7 @@ const { TabPane } = Tabs;
 const { Title } = Typography;
 
 const MainPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<string>('login');
+  const [activeTab, setActiveTab] = useState<string>('register');
   const navigate = useNavigate();
 
   const handleLogin = async (values: { email: string; password: string }) => {

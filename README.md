@@ -22,7 +22,7 @@ This project is a comprehensive dice game application where winning is achieved 
 
 ✅ **Uses PostgreSQL with Prisma ORM**.
 
-### Level ⭐️⭐️ 
+### Level ⭐️⭐️
 
 ✅ **Creates frontend**.
 
@@ -47,14 +47,14 @@ To switch between MongoDB and PostgreSQL, you need to update the .env file. Set 
 
 ### Steps to Start the application
 
-## `Download the project`
+## `Download The Project`
 
 ```
 git clone https://github.com/Fanur1991/IT-Academy-sprint_6-Dice_Game-TS-Nodejs-Mongo-Postgresql-React.git
 cd IT-Academy-sprint_6-Dice_Game-TS-Nodejs-Mongo-Postgresql-React
 ```
 
-### `Install dependencies`
+### `Install Dependencies`
 
 ```
 cd server
@@ -63,17 +63,58 @@ cd ../client
 npm install
 ```
 
-### `Run Docker compose`
+### `Run Docker with MongoDB`
 
 ```
 cd ../server
-
+docker compose up
 ```
 
+This will start the backend server on http://localhost:3002/
+
+To stop docker containers
+
+```
+docker compose stop
+```
+
+### `Run Docker with Prisma ORM`
+
+**!!!Change the USE_MONGO variable in .env to false**
+
+```
+cd server
+docker compose up
+```
+
+### `Run Prisma Generate and Migrate`
+
+```
 docker-compose run app npx prisma generate
 docker-compose run app npx prisma migrate dev --name init
-docker-compose build --no-cache
-docker compose up
+```
+
+### `Run Client`
+
+```
+cd client
+npm run dev
+```
+
+This will start the client on http://localhost:5173/
+
+### `Stop and Delete Docker Containers`
+
+```
+docker compose down
+```
+
+### `Run Tests`
+
+```
+cd server
+npm run test
+```
 
 ## Frontend
 
@@ -91,7 +132,6 @@ A frontend is developed to interact with the backend, providing a user-friendly 
 
 - Includes tests to verify the correct functioning of the application.
 - Utilizes Continuous Integration (CI) with GitHub Actions.
-
 
 ## Folder and Directory Structure
 
