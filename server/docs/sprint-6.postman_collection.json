@@ -1,0 +1,396 @@
+{
+  "info": {
+    "_postman_id": "96ed55bb-b67e-4cb7-9402-9b1d6cf7bfd0",
+    "name": "sprint-6",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "31296943"
+  },
+  "item": [
+    {
+      "name": "Player",
+      "item": [
+        {
+          "name": "Create a new player",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Juan\",\r\n    \"email\": \"admin23@admin.com\",\r\n    \"password\": \"123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3002/api/players",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3002",
+              "path": ["api", "players"]
+            }
+          },
+          "response": {
+            "id": "6656fc786b325b9d6a8b8a1b",
+            "name": "Juan",
+            "email": "admin23@admin.com",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTZmYzc4NmIzMjViOWQ2YThiOGExYiIsImlhdCI6MTcxNjk3Njc2MCwiZXhwIjoxNzE3NTgxNTYwfQ.fRKUrgL0IqCYK97r9lHz-mlTeV_shBoxUkIPXJ_To_Q"
+          }
+        },
+        {
+          "name": "Change a player name",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGY0ODQwMmI0MGUzZWIxNmY3MzMyYiIsImlhdCI6MTcxNjQ3MTg3MiwiZXhwIjoxNzE2NTU4MjcyfQ.T6RZWHeN0zLschFIPnaxhbM7GOpvS7A0F8MCexUXeww",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Fanur\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3002/api/players/:id",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3002",
+              "path": ["api", "players", ":id"],
+              "query": [
+                {
+                  "key": null,
+                  "value": "",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "664f48402b40e3eb16f7332b"
+                }
+              ]
+            }
+          },
+          "response": {
+            "id": "6656fc786b325b9d6a8b8a1b",
+            "name": "Fanur",
+            "email": "admin23@admin.com",
+            "createdAt": "2024-05-29T09:59:20.465Z",
+            "games": [],
+            "successRate": 0
+          }
+        },
+        {
+          "name": "Get list of all players with success percentage",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGY0ODQwMmI0MGUzZWIxNmY3MzMyYiIsImlhdCI6MTcxNjQ5Njc0NCwiZXhwIjoxNzE2NTgzMTQ0fQ.0KPqfOADNu7xRC-RdVb5hmkPGbpeqnmbvoWFVLyrsA4",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/api/players",
+              "host": ["{{server}}"],
+              "path": ["api", "players"]
+            }
+          },
+          "response": [
+            {
+              "id": "6656fc786b325b9d6a8b8a1b",
+              "name": "Juan",
+              "email": "admin23@admin.com",
+              "createdAt": "2024-05-29T09:59:20.465Z",
+              "games": [],
+              "successRate": 0
+            }
+          ]
+        },
+        {
+          "name": "Login a player",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"admin23@admin.com\",\r\n    \"password\": \"123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3002/api/players/login",
+              "host": ["{{server}}"],
+              "path": ["api", "players", "login"]
+            }
+          },
+          "response": {
+            "id": "6656fc786b325b9d6a8b8a1b",
+            "name": "Juan",
+            "email": "admin23@admin.com",
+            "password": "$2b$12$.1zeiWyXiDMlZsBR6clmTuD7tvFWi5/HXdsrVoNNN1N0sYbyknFhO",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTZmYzc4NmIzMjViOWQ2YThiOGExYiIsImlhdCI6MTcxNjk4MTEzMywiZXhwIjoxNzE3NTg1OTMzfQ.91_IB9xQ5gzCDj4T_EkthtHczDX4xYIigvMCUtH5TvU"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Games",
+      "item": [
+        {
+          "name": "Create a specific player rolls",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEwYmFmMjc3LTM3NTMtNGI0OS1hOTVmLTcxMzdiMjI1ODZlYiIsImlhdCI6MTcxNjU3OTc2NSwiZXhwIjoxNzE3MTg0NTY1fQ.LAKNse6t14Zgq6h7FNGyQXHLBhaWXDqt_nGbU66R5VQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3002/api/games/:id",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3002",
+              "path": ["api", "games", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "a0baf277-3753-4b49-a95f-7137b22586eb"
+                }
+              ]
+            }
+          },
+          "response": {
+            "playerId": "6656fc786b325b9d6a8b8a1b",
+            "diceOne": 1,
+            "diceTwo": 2,
+            "result": false,
+            "createdAt": "2024-05-29T11:13:14.380Z"
+          }
+        },
+        {
+          "name": "Delete a player's throws",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGY0ODQwMmI0MGUzZWIxNmY3MzMyYiIsImlhdCI6MTcxNjQ3MTg3MiwiZXhwIjoxNzE2NTU4MjcyfQ.T6RZWHeN0zLschFIPnaxhbM7GOpvS7A0F8MCexUXeww",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3002/api/games/:id",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3002",
+              "path": ["api", "games", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "6656fc786b325b9d6a8b8a1b"
+                }
+              ]
+            }
+          },
+          "response": {
+            "message": "Games deleted successfully"
+          }
+        },
+        {
+          "name": "Get list of throws a specific player",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEwYmFmMjc3LTM3NTMtNGI0OS1hOTVmLTcxMzdiMjI1ODZlYiIsImlhdCI6MTcxNjU3OTc2NSwiZXhwIjoxNzE3MTg0NTY1fQ.LAKNse6t14Zgq6h7FNGyQXHLBhaWXDqt_nGbU66R5VQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3002/api/games/:id",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3002",
+              "path": ["api", "games", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "6656fc786b325b9d6a8b8a1b"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "66570dca6b325b9d6a8b8a48",
+              "playerId": "6656fc786b325b9d6a8b8a1b",
+              "diceOne": 1,
+              "diceTwo": 2,
+              "result": false,
+              "createdAt": "2024-05-29T11:13:14.380Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Ranking",
+      "item": [
+        {
+          "name": "Get average success percentage of all players",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGY0ODQwMmI0MGUzZWIxNmY3MzMyYiIsImlhdCI6MTcxNjQ3MTg3MiwiZXhwIjoxNzE2NTU4MjcyfQ.T6RZWHeN0zLschFIPnaxhbM7GOpvS7A0F8MCexUXeww",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3002/api/ranking",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3002",
+              "path": ["api", "ranking"]
+            }
+          },
+          "response": {
+            "players": [
+              {
+                "id": "66508a6600cb5568794d2d54",
+                "name": "ANONYMOUS",
+                "email": "admin@admin.com",
+                "password": "$2b$12$QycDhXmGFeIUkto7cbkiEOgwcgfkMFM.Z4zqQfc02k9D1eFoeKcCK",
+                "createdAt": "2024-05-24T12:39:02.033Z",
+                "successRate": 12.5
+              },
+              {
+                "id": "6656fc786b325b9d6a8b8a1b",
+                "name": "Juan",
+                "email": "admin23@admin.com",
+                "password": "$2b$12$.1zeiWyXiDMlZsBR6clmTuD7tvFWi5/HXdsrVoNNN1N0sYbyknFhO",
+                "createdAt": "2024-05-29T09:59:20.465Z",
+                "successRate": 0
+              }
+            ],
+            "averageSuccessRate": 2.5
+          }
+        },
+        {
+          "name": "Get the loser",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGY0ODQwMmI0MGUzZWIxNmY3MzMyYiIsImlhdCI6MTcxNjQ3MTg3MiwiZXhwIjoxNzE2NTU4MjcyfQ.T6RZWHeN0zLschFIPnaxhbM7GOpvS7A0F8MCexUXeww",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3002/api/ranking/loser",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3002",
+              "path": ["api", "ranking", "loser"]
+            }
+          },
+          "response": {
+            "id": "6656fc786b325b9d6a8b8a1b",
+            "name": "Juan",
+            "email": "admin23@admin.com",
+            "password": "$2b$12$.1zeiWyXiDMlZsBR6clmTuD7tvFWi5/HXdsrVoNNN1N0sYbyknFhO",
+            "createdAt": "2024-05-29T09:59:20.465Z",
+            "successRate": 0
+          }
+        },
+        {
+          "name": "Get the winner",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGY0ODQwMmI0MGUzZWIxNmY3MzMyYiIsImlhdCI6MTcxNjQ3MTg3MiwiZXhwIjoxNzE2NTU4MjcyfQ.T6RZWHeN0zLschFIPnaxhbM7GOpvS7A0F8MCexUXeww",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3002/api/ranking/winner",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3002",
+              "path": ["api", "ranking", "winner"]
+            }
+          },
+          "response": {
+            "id": "66508a6600cb5568794d2d54",
+            "name": "ANONYMOUS",
+            "email": "admin@admin.com",
+            "password": "$2b$12$QycDhXmGFeIUkto7cbkiEOgwcgfkMFM.Z4zqQfc02k9D1eFoeKcCK",
+            "createdAt": "2024-05-24T12:39:02.033Z",
+            "successRate": 12.5
+          }
+        }
+      ]
+    }
+  ]
+}
