@@ -34,6 +34,7 @@ class PlayerController {
         token,
       });
     } catch (error) {
+      console.error(error);
       if (error instanceof Error) {
         return res.status(400).json({ message: error.message });
       } else {
@@ -52,6 +53,7 @@ class PlayerController {
         name,
         id,
       };
+
       const updatedPlayer: PlayerDTO =
         await this.playerService.updatePlayerName(data);
       return res.status(200).json(updatedPlayer);

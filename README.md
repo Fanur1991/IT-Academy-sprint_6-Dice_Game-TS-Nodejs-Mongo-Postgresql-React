@@ -78,8 +78,12 @@ docker compose up
 | |-- index.ts
 |
 | |-- /tests
-| | |-- playerTests.ts
-| | |-- gameTests.ts
+| | |-- /application
+| | | |-- /services
+| | | | |-- playerService.test.ts
+| | |-- /infrastructure
+| | | |-- /controllers
+| | | | |-- playerController.test.ts
 |
 | |-- /utils
 | | |-- getRepository.ts

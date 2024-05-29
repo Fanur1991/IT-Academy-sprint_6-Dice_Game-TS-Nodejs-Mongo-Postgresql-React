@@ -14,11 +14,6 @@ class PlayerRepository implements IPlayerRepository {
     return player.toObject({ getters: true }) as IPlayer;
   }
 
-  // async findPlayerById(id: string): Promise<IPlayer> {
-  //   const player = await PlayerModel.findById(id);
-  //   return player ? player.toObject() : null;
-  // }
-
   async updatePlayerName(data: UpdatePlayerDTO): Promise<IPlayer> {
     const player = await Player.findByIdAndUpdate(
       data.id,
@@ -33,13 +28,6 @@ class PlayerRepository implements IPlayerRepository {
     const players = await Player.find().populate('games');
     return players.map(player => player.toObject({ getters: true }) as IPlayer);
   }
-
-  // async deleteAllGamesForPlayer(
-  //   playerId: string
-  // ): Promise<{ message: string }> {
-  //   await GameModel.deleteMany({ playerId });
-  //   return { message: 'All games deleted' };
-  // }
 
   async findPlayerByEmail(email: string): Promise<IPlayer | null> {
     const player = await Player.findOne({ email });
