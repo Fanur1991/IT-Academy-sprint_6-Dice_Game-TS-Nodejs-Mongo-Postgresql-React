@@ -14,7 +14,7 @@ This project is a comprehensive dice game application where winning is achieved 
 ![React](https://img.shields.io/badge/-React-61DAFB?style=flat-square&logo=react&logoColor=black)
 ![Ant Design](https://img.shields.io/badge/-Ant_Design-0170FE?style=flat-square&logo=antdesign&logoColor=white)
 ![Jest](https://img.shields.io/badge/-Jest-C21325?style=flat-square&logo=jest&logoColor=white)
-![Docker](https://img.shields.io/badge/docker?style=flat-square&logo=docker&color=%232496ED)
+![Static Badge](https://img.shields.io/badge/docker-%23000?style=flat-square&logo=docker&logoColor=%23000&color=%232496ED)
 ![GitHub Actions](https://img.shields.io/badge/-GitHub_Actions-2088FF?style=flat-square&logo=github-actions&logoColor=white)
 
 ## Important: Project Levels
