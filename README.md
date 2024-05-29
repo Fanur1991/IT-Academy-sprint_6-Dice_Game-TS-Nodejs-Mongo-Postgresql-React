@@ -1,6 +1,8 @@
 # Dice Game Full-Stack Application
 
-Dice game using clean architecture and a lot of techonologies. You will win the game if you get a 7, any other result will be a lost game. This project integrates both frontend and backend components with two databases (MongoDB and PostgreSQL). The application allows users to register, login, play the dice game, and view various statistics.
+This project is a comprehensive dice game application where winning is achieved by rolling a seven. Any other result is considered a loss. The application consists of both frontend and backend components and utilizes two databases: MongoDB and PostgreSQL. The features of the application include user registration and authentication, gameplay for dice, and viewing various statistics.
+
+You can access the postman documentation [here](server/docs/sprint-6.postman_collection.json) and the API endpoints [here](./API.md).
 
 ## Technologies
 
@@ -22,19 +24,6 @@ Dice game using clean architecture and a lot of techonologies. You will win the 
 - Registration without a name assigns the player as "ANONYMOUS", with multiple such players possible.
 - Each player is assigned a unique identifier and registration date.
 - Players can delete their roll history but cannot delete specific game entries.
-
-## API Endpoints
-
-- `POST /api/players`: Create a player.
-- `PUT /api/players/{id}`: Modify a player's name.
-- `GET /api/players`: List all players with their success percentages.
-- `POST /api/players/login`: Login a player.
-- `POST /api/games/{id}`: Perform a dice roll for a specific player.
-- `DELETE /api/games/{id}`: Delete a player's game history.
-- `GET /api/games/{id}`: List a player's game history.
-- `GET /api/ranking`: Retrieve player rankings by success rate and the average success rate.
-- `GET /api/ranking/loser`: Identify the player with the lowest success rate.
-- `GET /api/ranking/winner`: Identify the player with the highest success rate.
 
 ## Database and Persistence
 
