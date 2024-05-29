@@ -25,11 +25,19 @@ You can access the postman documentation [here](server/docs/sprint-6.postman_col
 - Each player is assigned a unique identifier and registration date.
 - Players can delete their roll history but cannot delete specific game entries.
 
-## Database and Persistence
+## Important: Project Levels
 
-- Level 1: Uses MySQL with Sequelize ORM.
-- Level 2: Creates frontend
-- Level 3: Uses MongoDB with Mongoose for database operations.
+### Level ⭐️
+
+- ✅ **Uses PostgreSQL with Prisma ORM**.
+
+### Level ⭐️⭐️ 
+
+- ✅ **Creates frontend**.
+
+### Level ⭐️⭐️⭐️
+
+- ✅ **Uses MongoDB with Mongoose for database operations**.
 
 ## Frontend
 
