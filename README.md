@@ -2,8 +2,6 @@
 
 This project is a comprehensive dice game application where winning is achieved by rolling a seven. Any other result is considered a loss. The application consists of both frontend and backend components and utilizes two databases: MongoDB and PostgreSQL. The features of the application include user registration and authentication, gameplay for dice, and viewing various statistics.
 
-You can access the postman documentation [here](server/docs/sprint-6.postman_collection.json) and the API endpoints [here](./API.md).
-
 ## Technologies
 
 ![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
@@ -18,60 +16,30 @@ You can access the postman documentation [here](server/docs/sprint-6.postman_col
 ![Jest](https://img.shields.io/badge/-Jest-C21325?style=flat-square&logo=jest&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/-GitHub_Actions-2088FF?style=flat-square&logo=github-actions&logoColor=white)
 
-## Player Registration and Management
-
-- Players register with a unique name to participate.
-- Registration without a name assigns the player as "ANONYMOUS", with multiple such players possible.
-- Each player is assigned a unique identifier and registration date.
-- Players can delete their roll history but cannot delete specific game entries.
-
 ## Important: Project Levels
 
 ### Level ⭐️
 
-- ✅ **Uses PostgreSQL with Prisma ORM**.
+✅ **Uses PostgreSQL with Prisma ORM**.
 
 ### Level ⭐️⭐️ 
 
-- ✅ **Creates frontend**.
+✅ **Creates frontend**.
 
 ### Level ⭐️⭐️⭐️
 
-- ✅ **Uses MongoDB with Mongoose for database operations**.
-
-## Frontend
-
-- A frontend is developed to interact with the backend, providing a user-friendly interface for game interaction and viewing statistics.
+✅ **Uses MongoDB with Mongoose for database operations**.
 
 ## Development and Documentation
 
-- Comprehensive API documentation, including route details, parameters, and expected responses.
-- Include API testing using tools like Postman or Insomnia.
-- Database schema diagrams and Docker instances for DB management are included.
-
-## Testing and CI
-
-- Includes tests to verify the correct functioning of the application.
-- Utilizes Continuous Integration (CI) with GitHub Actions.
-
-## Technologies
-
-- The project is developed using TypeScript to enhance code quality and maintainability.
-
-## Setup and Installation
-
-Detailed instructions are provided for setting up and installing the application, ensuring you can get it running in your local development environment seamlessly.
-
-## Contributions
-
-Contributions are welcome. Ensure any pull requests or issues adhere to the established coding standards and include necessary tests for new features.
+- Comprehensive API documentation, including route details, parameters, and expected responses [here](server/docs/sprint-6.postman_collection.json).
+- Include API endpoints [here](./API.md).
+- Database schema diagrams [here](server/docs/Diagram.jpg).
 
 
+## Frontend
 
-docker-compose run app npx prisma generate
-docker-compose run app npx prisma migrate dev --name init
-docker-compose build --no-cache
-docker compose up
+A frontend is developed to interact with the backend, providing a user-friendly interface for game interaction and viewing statistics.
 
 ### Login page
 
@@ -80,6 +48,18 @@ docker compose up
 ### Home page
 
 ![Home page](./home.png)
+
+## Testing and CI
+
+- Includes tests to verify the correct functioning of the application.
+- Utilizes Continuous Integration (CI) with GitHub Actions.
+
+
+docker-compose run app npx prisma generate
+docker-compose run app npx prisma migrate dev --name init
+docker-compose build --no-cache
+docker compose up
+
 
 ```
 /server
