@@ -33,19 +33,35 @@ This project is a comprehensive dice game application where winning is achieved 
 ## Development and Documentation
 
 - Comprehensive API documentation, including route details, parameters, and expected responses [here](server/docs/sprint-6.postman_collection.json).
-- Include API endpoints [here](./API.md).
+- API endpoints [here](./API.md).
 - Database schema diagrams [here](server/docs/Diagram.jpg).
 
+## Important!
+
+To switch between MongoDB and PostgreSQL, you need to update the .env file. Set the USE_MONGO variable to **true** for using **MongoDB**, and to **false** for using **PostgreSQL**.
+
+## Previous requirements
+
+- Make sure you have [Node.js](https://nodejs.org/en/download/package-manager) installed.
+- [Docker](https://www.docker.com/products/docker-desktop/).
+
+### Steps to Start the application
+
+
+docker-compose run app npx prisma generate
+docker-compose run app npx prisma migrate dev --name init
+docker-compose build --no-cache
+docker compose up
 
 ## Frontend
 
 A frontend is developed to interact with the backend, providing a user-friendly interface for game interaction and viewing statistics.
 
-### Login page
+### Login page:
 
 ![Login page](./login.png)
 
-### Home page
+### Home page:
 
 ![Home page](./home.png)
 
@@ -55,11 +71,7 @@ A frontend is developed to interact with the backend, providing a user-friendly 
 - Utilizes Continuous Integration (CI) with GitHub Actions.
 
 
-docker-compose run app npx prisma generate
-docker-compose run app npx prisma migrate dev --name init
-docker-compose build --no-cache
-docker compose up
-
+## Folder and Directory Structure
 
 ```
 /server
@@ -131,9 +143,13 @@ docker compose up
 | | |-- /application
 | | | |-- /services
 | | | | |-- playerService.test.ts
+| | | | |-- gameService.test.ts
+| | | | |-- rankingService.test.ts
 | | |-- /infrastructure
 | | | |-- /controllers
 | | | | |-- playerController.test.ts
+| | | | |-- gameController.test.ts
+| | | | |-- rankingController.test.ts
 |
 | |-- /utils
 | | |-- getRepository.ts
@@ -141,6 +157,10 @@ docker compose up
 |
 |-- /prisma
 | |-- schema.prisma
+|
+| |-- /docs
+| | |-- sprint-6.postman_collection.json
+| | |-- Diagram.jpg
 |
 |-- .env
 |-- package.json
@@ -150,3 +170,11 @@ docker compose up
 |-- docker-compose.yml
 |-- .gitignore
 ```
+
+## License
+
+This project is distributed under the Apache 2.0 license.
+
+---
+
+Developed by [Fanur Khusainov](https://www.linkedin.com/in/fanur-khusainov-ab86b2102/) with ❤️ and ☕.
