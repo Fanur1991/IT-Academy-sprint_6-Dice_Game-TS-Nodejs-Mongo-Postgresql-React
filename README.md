@@ -47,6 +47,28 @@ To switch between MongoDB and PostgreSQL, you need to update the .env file. Set 
 
 ### Steps to Start the application
 
+## `Download the project`
+
+```
+git clone https://github.com/Fanur1991/IT-Academy-sprint_6-Dice_Game-TS-Nodejs-Mongo-Postgresql-React.git
+cd IT-Academy-sprint_6-Dice_Game-TS-Nodejs-Mongo-Postgresql-React
+```
+
+### `Install dependencies`
+
+```
+cd server
+npm install
+cd ../client
+npm install
+```
+
+### `Run Docker compose`
+
+```
+cd ../server
+
+```
 
 docker-compose run app npx prisma generate
 docker-compose run app npx prisma migrate dev --name init

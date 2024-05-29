@@ -14,7 +14,6 @@ dist
 
 # Archivos Locales y de Entorno
 *.local
-.env
 
 # Archivos del Sistema y de Proyectos
 .DS_Store
