@@ -1,6 +1,6 @@
 # Dice Game Full-Stack Application
 
-This project is a comprehensive dice game application where winning is achieved by rolling a seven. Any other result is considered a loss. The application consists of both frontend and backend components and utilizes two databases: MongoDB and PostgreSQL. The features of the application include user registration and authentication, gameplay for dice, and viewing various statistics.
+This training project is a comprehensive dice game application where winning is achieved by rolling a seven. Any other result is considered a loss. The application consists of both frontend and backend components and utilizes two databases: MongoDB and PostgreSQL. The features of the application include user registration and authentication, gameplay for dice, and viewing various statistics.
 
 ## Technologies
 
