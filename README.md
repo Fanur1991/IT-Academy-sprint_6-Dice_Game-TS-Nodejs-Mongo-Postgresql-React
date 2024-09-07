@@ -1,6 +1,6 @@
 # Dice Game Full-Stack Application
 
-This project is a comprehensive dice game application where winning is achieved by rolling a seven. Any other result is considered a loss. The application consists of both frontend and backend components and utilizes two databases: MongoDB and PostgreSQL. The features of the application include user registration and authentication, gameplay for dice, and viewing various statistics.
+This training project is a comprehensive dice game application where winning is achieved by rolling a seven. Any other result is considered a loss. The application consists of both frontend and backend components and utilizes two databases: MongoDB and PostgreSQL. The features of the application include user registration and authentication, gameplay for dice, and viewing various statistics.
 
 ## Technologies
 
@@ -14,6 +14,7 @@ This project is a comprehensive dice game application where winning is achieved 
 ![React](https://img.shields.io/badge/-React-61DAFB?style=flat-square&logo=react&logoColor=black)
 ![Ant Design](https://img.shields.io/badge/-Ant_Design-0170FE?style=flat-square&logo=antdesign&logoColor=white)
 ![Jest](https://img.shields.io/badge/-Jest-C21325?style=flat-square&logo=jest&logoColor=white)
+![Static Badge](https://img.shields.io/badge/docker-%23000?style=flat-square&logo=docker&logoColor=%23000&color=%232496ED)
 ![GitHub Actions](https://img.shields.io/badge/-GitHub_Actions-2088FF?style=flat-square&logo=github-actions&logoColor=white)
 
 ## Important: Project Levels
