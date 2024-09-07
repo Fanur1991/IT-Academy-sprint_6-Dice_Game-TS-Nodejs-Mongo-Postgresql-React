@@ -7,9 +7,9 @@ import {
 } from 'react-router-dom';
 import AuthPage from './pages/AuthPage';
 import MainPage from './pages/MainPage';
+import RankingPage from './pages/RankingPage';
 
 import './App.css';
-import RankingPage from './pages/RankingPage';
 
 const App: React.FC = () => {
   const isAuthenticated = !!localStorage.getItem('token');

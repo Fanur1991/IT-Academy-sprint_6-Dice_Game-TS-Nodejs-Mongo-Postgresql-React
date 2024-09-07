@@ -20,7 +20,7 @@ import axios from 'axios';
 const { TabPane } = Tabs;
 const { Title } = Typography;
 
-const MainPage: React.FC = () => {
+const AuthPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('register');
   const navigate = useNavigate();
 
@@ -186,4 +186,4 @@ const MainPage: React.FC = () => {
   );
 };
 
-export default MainPage;
+export default AuthPage;
